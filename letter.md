@@ -28,7 +28,7 @@ sub MAIN( Str $letter-to-santa = 'dear-santa.txt' ) {
 }
 ```
 
-And, of course, using Perl 6, which being able to use `$þ` as a variable, and even [runic](https://en.wikipedia.org/wiki/Runic_(Unicode_block)) `our $ᚣ = Tru` was his favorite language. In a single line you can get all the chunks obtaining something like this:
+And, of course, using Perl 6, which being able to use `$þ` as a variable, and even [runic](https://en.wikipedia.org/wiki/Runic_(Unicode_block)) `our $ᚣ = True` was his favorite language. In a single line you can get all the chunks obtaining something like this:
 
 ```
 [ "Dear Santa: I have been a good boy so I want you to bring me a collection of ccythes ", "an ocean liner with a captain ", "a purser ", "a time travel machine ", "instructions to operate it ", "I know I haven't been so good at times but that is why I'm asking the time machine so that I can make it good ", "well ", "also find out what happened on July 13th which I completely forgot.\n" ]
@@ -152,4 +152,109 @@ persons that had not been good. Scale. And resources. Resources should
 be spent only in good persons, not in bad persons. Bad persons are
 bad, and that's that. So went back to coding, Rudolph slipped away
 looking for lichen candy or whatever, and he produced this:
+
+```
+use Text::Markdown;
+
+sub MAIN( Str $letter-to-santa = 'letters/dear-santa-sections.md' ) {
+    my $letter = Text::Markdown::Document.new($letter-to-santa.IO.slurp());
+    my $flip = False;
+    my @paragraphs =  $letter.items.grep( { $flip = ($^þ ~~  Text::Markdown::Heading and $^þ.level == 2)?? !$flip !! $flip } );
+    say so any @paragraphs.map( {$^þ.Str ~~ /good/ } );
+}
+```
+
+Santa was kind of proud of the trick that extracted the paragraphs
+after the second heading, as well as the fact that he had been able to
+put to good use the Thorn letter, which he loved. He also loved
+functional programming, having cut his teeth in Lisp. So he created
+this flip-switch that is initially false but flips on when the element
+it is dealing with is a heading and its level is two. He was also
+happy that he could do this kind of thing with the structured layered
+on top of the text by the marks. 
+
+Besides, he could check whether the word "good" was present in any of
+the paragraphs between that heading (**Behavior**) and the next. And
+`any` is so cool. It is enough that one of the paragraph mentions
+`good`. The last line will first return an array of Boolean values,
+and will eventually say `True` if just one of them includes
+`good`. False otherwise. Good for culling the good from the bad. 
+
+Santa was happy. Er. But still.
+
+## The toys are the important thing here.
+
+So what he actually wanted was a list of the toys. After requesting,
+once again, a change of letter format, which he could do because he
+was Santa and everyone wanted his free stuff for Christmas, he started
+to receive letters with this structure:
+
+```
+# Dear Santa
+
+## Behavior
+
+I have been a good boy 
+
+
+## Requests
+
+And this is what I want
+
+ - scythes 
+ - an ocean liner with a captain and a purser
+ - a time travel machine and instructions to operate it 
+```
+
+What they lack in spontaneity they have in structure. And structure is
+good. You can get a list of requests thus:
+
+```
+sub MAIN( Str $letter-to-santa = 'letters/dear-santa-list.md' ) {
+    my $letter = Text::Markdown::Document.new($letter-to-santa.IO.slurp());
+    my $flip = False;
+    my $list =  $letter.items
+    .grep( { $flip = ( $flip
+		      or so ($^þ ~~  Text::Markdown::Heading
+			     and $^þ.level == 2
+			     and $^þ.text ~~ m/<[Rr]>equest/) ) } )
+    .grep( { $^þ ~~  Text::Markdown::List })
+    .map( {$^þ.items} ).flat
+    .map( {$^þ.items} ).flat
+    .map( {$^þ.items} ).flat;
+    
+    say to-json $list ;
+
+}
+```
+
+That is really an unsaintly list of chained list processing
+expressions. And this sentence before this one has an list of list
+mentions that is almost as bad. But let us see what is going on there.
+
+First thing in the list, we take only what comes *after* the
+**Requests** heading, using regular expressions and stuff. We could
+have probably pared it down to a transformation to `Str` but we would
+have lost the structure. And structure is important, Santa is never
+tired of repeating that. Next we extract only those elements thar are
+actually a list, taking out all the fluff. 
+
+And it so happens that there is such a thing as too much
+structure. The list has elements that have elements that have elements
+in it. 
+
+That, or [Text::Markdown](https://github.com/retupmoca/p6-markdown)
+could do with a big makeover. Which is what the author of this post is
+putting on his particular wish list. 
+
+## Not there yet
+
+But almost. We have the list, and now Santa finds things like time
+travel machines and Mondays and things like that. He cannot order
+Mondays in the elf factory. He would have to read every single list of
+things. But no worries.
+
+
+
+
 
