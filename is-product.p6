@@ -19,7 +19,6 @@ SELECT DISTINCT ?item ?itemLabel WHERE {
   FILTER(CONTAINS(LCASE(?itemLabel), 
 END
     $query ~= '"' ~ $item ~ '"))}';
-    say "→", $query;
     my $result = query( $query );
     return so $result<results><bindings>.elems;
 }

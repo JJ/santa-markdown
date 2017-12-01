@@ -252,7 +252,79 @@ putting on his particular wish list.
 But almost. We have the list, and now Santa finds things like time
 travel machines and Mondays and things like that. He cannot order
 Mondays in the elf factory. He would have to read every single list of
-things. But no worries.
+things. But no worries. That can be taken care of, too:
+
+```
+use JSON::Tiny;
+use Wikidata::API;
+
+sub MAIN( Str $toy-list = 'list.json' ) {
+    my $toys = from-json $toy-list.IO.slurp();
+    
+    say $toys.grep( { is-product( $^þ) } );
+}
+
+sub is-product( Str $item ) {
+    my $query = q:to/END/;
+SELECT DISTINCT ?item ?itemLabel WHERE {
+  ?item (wdt:P31/wdt:P279*) wd:Q2424752.
+  ?item rdfs:label ?itemLabel.
+  FILTER(CONTAINS(LCASE(?itemLabel), 
+END
+    $query ~= '"' ~ $item ~ '"))}';
+    my $result = query( $query );
+    return so $result<results><bindings>.elems;
+}
+```
+
+Simply enough, this program goes over the saved list of items in the
+wish list, and checks for *product-ness*. Is it a product? It
+goes. Are you asking for last Friday evening, which you completely
+missed? It does not, and don't you dare to waste Santa's time, boy.
+
+The gist of the thing is in the Wikidata query, which uses the
+brand-new [`Wikidata::API`](https://github.com/JJ/p6-Wikidata-API)
+module. This module just sends stuff to the Wikidata API and returns
+it as an object. Believe it or not, that is what the SPARQL query
+does: inserts the iten name into the query, makes the query, and
+returns true if the number of returned elements is not
+zero. *Productness* at your fingertips! In a few lines of code! Now he
+could just chain all the stuff together and obtain from a letter
+containing this
+
+```
+ - Morning sickness
+ - Scythe
+ - Mug
+ 
+```
+
+Just the two of them which you can actually order from your local,
+downtown, mom and pop shop, which is where Santa actually goes to
+secretly buy all the stuff because he buys in bulk and he gets a
+pretty good deal.
+
+Santa smiled, and a loud cheer erupted from the crowd of elves,
+reindeers, and a couple of puffins that were there for no good
+reason. They then set down to 
+
+## Wrap up
+
+Santa and Perl 6 are a good match, simply because they both came in
+Christmas time. Santa finds you can do lots of useful things with it,
+by itself or by using one of the fine modules that have become
+available lately. 
+
+The author of this, however, will include in his letter to Santa some
+help to carry ahead with the two modules used in this post, maintained
+by him, and which need more experienced coders to test, extend and
+maybe rewrite from scratch. But he is happy to see that mundane and
+slightly divine things like processing letters to Santa can be done
+straight away using Perl6. And you should it too.
+
+Code and samples for this post are available
+from [GitHub](https://github.com/JJ/santa-markdown). Also this
+text. Help and suggestion are very much welcome.
 
 
 
