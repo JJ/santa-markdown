@@ -9,6 +9,6 @@ I have been a good boy
 
 And this is what I want
 
-- scythes 
-- an ocean liner with a captain and a purser
-- a time travel machine and instructions to operate it 
+ - scythes 
+ - an ocean liner with a captain and a purser
+ - a time travel machine and instructions to operate it 
