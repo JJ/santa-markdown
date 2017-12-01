@@ -29,13 +29,19 @@ sub MAIN( Str $letter-to-santa = 'dear-santa.txt' ) {
 ~~~
 
 And, of course, using Perl 6, which being able to use `$þ` as a variable, and even [runic](https://en.wikipedia.org/wiki/Runic_(Unicode_block)) `our $ᚣ = Tru` was his favorite language. In a single line you can get all the chunks obtaining something like this:
+
 ~~~
 [ "Dear Santa: I have been a good boy so I want you to bring me a collection of ccythes ", "an ocean liner with a captain ", "a purser ", "a time travel machine ", "instructions to operate it ", "I know I haven't been so good at times but that is why I'm asking the time machine so that I can make it good ", "well ", "also find out what happened on July 13th which I completely forgot.\n" ]
 ~~~
+
 Which made Santa start roaring again.
 "Scale *and* structure! We need to scale and we need structure!"
 
 ## Markdown to the rescue.
 
-Oakius the elf said. "Use the elvish-est language, Elm. You know, it's elf but for a letter"
+Marcius pitched in. "Everybody knows [Markdown](https://help.github.com/articles/basic-writing-and-formatting-syntax/). It's text, with a bit of marking thrown in for structure.
+
+Oakius, who was working towards his promotion to Elf, Second class, said. "Use the elvish-est language, Elm. You know, it's elf but for a letter"
+
+"I can do that", said Santa. Elves loved his can do approach. 
 
