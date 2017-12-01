@@ -14,7 +14,11 @@ sub MAIN( Str $letter-to-santa = 'letters/dear-santa-list.md' ) {
 			     and $^þ.level == 2
 			     and $^þ.text ~~ m/<[Rr]>equest/) ) } )
     .grep( { $^þ ~~  Text::Markdown::List })
-    .map( { $^þ.items });
-    say $list[0][0].items ;
+    .map( {$^þ.items} ).flat
+    .map( {$^þ.items} ).flat
+    .map( {$^þ.items} ).flat;
+    
+    say to-json $list ;
+
 }
 			     
