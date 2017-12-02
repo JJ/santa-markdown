@@ -80,7 +80,7 @@ and nothing resembling working code. So they gave Rudolph the (nice)
 Red Nose Reindeer a note, which he dutifully carried pricked in one of
 his smaller antlers. 
 
-"Should we go back to Perl6 then?".
+"Should we go back to Perl6 then?"
 
 ## Processing Markdown with Perl6
 
