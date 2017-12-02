@@ -15,7 +15,7 @@ Diodius the elf briefly raised his head from his hiding place and said "Tell the
 Santa stopped yelling and scratched his well-bearded chin. "I can do that". Early children adopters sent a letter just like this one.
 
 ```
-Dear Santa: I have been a good boy so I want you to bring me a collection of ccythes and an ocean liner with a captain and a purser and a time travel machine and instructions to operate it and I know I haven't been so good at times but that is why I'm asking the time machine so that I can make it good and well and also find out what happened on July 13th which I completely forgot.
+Dear Santa: I have been a good boy so I want you to bring me a collection of scythes and an ocean liner with a captain and a purser and a time travel machine and instructions to operate it and I know I haven't been so good at times but that is why I'm asking the time machine so that I can make it good and well and also find out what happened on July 13th which I completely forgot.
 ```
 
 "I can do that?". Santa repeated to himself. He would have to extract a list of gifts out of that single-line mess. For instance, dividing it by *and*.
@@ -36,7 +36,7 @@ And, of course, using Perl 6, which being able to use `$þ` as a variable, and e
 
 The `/\s* «and» \s*/` regexp took the `and`s and also trimmed spaces,
 creating a set of sentences. And these sentences might or might not
-contain something the customer wanted Sante to bring. 
+contain something the customer wanted Santa to bring. 
 Which made Santa start roaring again.
 "Scale *and* structure! We need to scale and we need structure!"
 
@@ -77,7 +77,7 @@ the Easter Bunny or other evil creatures".
 
 Those elves nearest the screen observed lots of red, but not nice red,
 and nothing resembling working code. So they gave Rudolph the (nice)
-Red Nose Reineer a note, which he dutifully carried pricked in one of
+Red Nose Reindeer a note, which he dutifully carried pricked in one of
 his smaller antlers. 
 
 "Should we go back to Perl6 then?".
@@ -239,7 +239,7 @@ First thing in the list, we take only what comes *after* the
 **Requests** heading, using regular expressions and stuff. We could
 have probably pared it down to a transformation to `Str` but we would
 have lost the structure. And structure is important, Santa is never
-tired of repeating that. Next we extract only those elements thar are
+tired of repeating that. Next we extract only those elements that are
 actually a list, taking out all the fluff. 
 
 And it so happens that there is such a thing as too much
@@ -289,7 +289,7 @@ The gist of the thing is in the Wikidata query, which uses the
 brand-new [`Wikidata::API`](https://github.com/JJ/p6-Wikidata-API)
 module. This module just sends stuff to the Wikidata API and returns
 it as an object. Believe it or not, that is what the SPARQL query
-does: inserts the iten name into the query, makes the query, and
+does: inserts the item name into the query, makes the query, and
 returns true if the number of returned elements is not
 zero. *Productness* at your fingertips! In a few lines of code! Now he
 could just chain all the stuff together and obtain from a letter
