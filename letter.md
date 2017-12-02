@@ -24,16 +24,19 @@ Dear Santa: I have been a good boy so I want you to bring me a collection of ccy
 use JSON::Tiny;
 
 sub MAIN( Str $letter-to-santa = 'dear-santa.txt' ) {
-    say to-json "dear-santa.txt".IO.slurp().split(/and\s/);
+    say to-json "dear-santa.txt".IO.slurp().split(/\s* «and» \s* /);
 }
 ```
 
 And, of course, using Perl 6, which being able to use `$þ` as a variable, and even [runic](https://en.wikipedia.org/wiki/Runic_(Unicode_block)) `our $ᚣ = True` was his favorite language. In a single line you can get all the chunks obtaining something like this:
 
 ```
-[ "Dear Santa: I have been a good boy so I want you to bring me a collection of ccythes ", "an ocean liner with a captain ", "a purser ", "a time travel machine ", "instructions to operate it ", "I know I haven't been so good at times but that is why I'm asking the time machine so that I can make it good ", "well ", "also find out what happened on July 13th which I completely forgot.\n" ]
+[ "Dear Santa: I have been a good boy so I want you to bring me a collection of scythes", "an ocean liner with a captain", "a purser", "a time travel machine", "instructions to operate it", "I know I haven't been so good at times but that is why I'm asking the time machine so that I can make it good", "well", "also find out what happened on July 13th which I completely forgot.\n" ]
 ```
 
+The `/\s* «and» \s*/` regexp took the `and`s and also trimmed spaces,
+creating a set of sentences. And these sentences might or might not
+contain something the customer wanted Sante to bring. 
 Which made Santa start roaring again.
 "Scale *and* structure! We need to scale and we need structure!"
 
